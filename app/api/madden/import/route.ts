@@ -1,0 +1,4 @@
+import { NextRequest, NextResponse } from 'next/server';
+export const runtime = 'nodejs';
+export async function GET(){return NextResponse.json({service:'BBL Madden Companion Import',status:'ready',accepts:['POST']});}
+export async function POST(req:NextRequest){try{const contentType=req.headers.get('content-type')||'';let payload:unknown;if(contentType.includes('application/json')) payload=await req.json();else{const text=await req.text();try{payload=JSON.parse(text)}catch{payload={raw:text}}}const receivedAt=new Date().toISOString();console.log('BBL_MADDEN_EXPORT',JSON.stringify({receivedAt,payload}));return NextResponse.json({ok:true,league:'Big Baller League',receivedAt,message:'BBL received the Madden export successfully.'});}catch(error){console.error('BBL_IMPORT_ERROR',error);return NextResponse.json({ok:false,message:'BBL could not parse this export.'},{status:400});}}
