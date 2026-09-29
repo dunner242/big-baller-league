@@ -1,1 +1,0 @@
-export type StoryEvent={type:'breakout'|'record'|'upset'|'trade'|'award'|'community'|'rivalry'|'contract'|'controversy';subject:string;headline:string;summary:string;week:number;season:number;fictional?:boolean};export function storylineLabel(e:StoryEvent){return e.fictional?'BBL UNIVERSE':'BBL NEWS';}
