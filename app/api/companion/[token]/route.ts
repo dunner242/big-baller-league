@@ -1,0 +1,6 @@
+import {NextRequest,NextResponse} from 'next/server';
+// Companion receiver foundation. Production persistence is enabled once DATABASE_URL is configured.
+export async function POST(req:NextRequest,{params}:{params:Promise<{token:string}>}){const {token}=await params;let payload:any;try{payload=await req.json()}catch{return NextResponse.json({ok:false,error:'Invalid JSON'},{status:400})}const kind=detectKind(payload);const rows=countRows(payload);console.log('[BBL IMPORT]',{token:token.slice(0,6)+'…',kind,rows,receivedAt:new Date().toISOString()});return NextResponse.json({ok:true,league:'Big Baller League',detected:kind,rows,message:'BBL received the franchise export.'})}
+function detectKind(p:any){const text=JSON.stringify(Object.keys(p||{})).toLowerCase();if(text.includes('roster')||text.includes('player'))return 'roster';if(text.includes('schedule')||text.includes('game'))return 'weekly-stats';if(text.includes('league')||text.includes('team'))return 'league-info';return 'unknown'}
+function countRows(p:any){if(Array.isArray(p))return p.length;if(!p||typeof p!=='object')return 0;return Object.values(p).reduce((n:any,v:any)=>n+(Array.isArray(v)?v.length:0),0)}
+export async function GET(){return NextResponse.json({service:'BBL Companion Receiver',status:'online',version:'0.1.0'})}
