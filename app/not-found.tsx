@@ -1,0 +1,1 @@
+export default function NotFound(){return <main className="wrap errorPage"><b>404</b><h1>That play went nowhere.</h1><p>The page you're looking for isn't in the BBL playbook yet.</p><a href="/">← Back to BBL Sports</a></main>}
