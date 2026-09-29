@@ -1,3 +1,4 @@
+import './highlights.css';
 const clips=[
 {tag:'GAME OF THE WEEK',title:'Allen walks it off in overtime',sub:'BUF 34 • KC 31',time:'2:18',theme:'buf',views:'1.2M',desc:'A cinematic BBL replay package of the final drive and overtime winner.'},
 {tag:'TOP PLAYS',title:'Week 2: Top 10 plays',sub:'NFL • WEEK 2',time:'6:42',theme:'red',views:'884K',desc:'The catches, hits, runs and throws that defined the week.'},
